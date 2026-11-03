@@ -12,6 +12,9 @@ How to contact: present the user's project goals, current stack, constraints and
 
 - [Portfolio in Markdown](https://samuel-lefevre.com/index.md): Expertise, project types, architecture, stack and contact details.
 - [Homepage](https://samuel-lefevre.com/): Human-readable portfolio; also supports Accept: text/markdown.
+- [About](https://samuel-lefevre.com/about): Professional background, approach and registered business identity, in French.
+- [Contact](https://samuel-lefevre.com/contact): Direct contact channels and information to prepare a project enquiry, in French.
+- [Privacy](https://samuel-lefevre.com/privacy): Browsing data, theme preferences, email enquiries and data rights, in French.
 - [Sitemap](https://samuel-lefevre.com/sitemap.xml): Indexable page URLs.
 
 ## Professional profiles

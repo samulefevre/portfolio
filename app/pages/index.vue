@@ -1,6 +1,17 @@
 <script setup lang="ts">
+useSeoMeta({
+  ogTitle: 'Samuel Lefèvre — Développeur full-stack TypeScript',
+  ogUrl: 'https://samuel-lefevre.com/',
+  ogType: 'website',
+  ogImage: 'https://samuel-lefevre.com/og-image.png',
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: 'Samuel Lefèvre — Développeur full-stack TypeScript. Des logiciels pensés pour durer.',
+})
+
 useHead({
   link: [
+    { rel: 'canonical', href: 'https://samuel-lefevre.com/' },
     { rel: 'alternate', type: 'text/markdown', href: '/index.md' },
   ],
   script: [{
