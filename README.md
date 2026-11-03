@@ -17,6 +17,33 @@ pnpm dev
 
 Local checks: `pnpm lint`, `pnpm typecheck`, `pnpm build`.
 
+## Agent-facing content
+
+The homepage serves HTML by default and Markdown when requested with
+`Accept: text/markdown`. Both variants set `Vary: Accept`; quality values and
+media-range exclusions are respected. Unsupported homepage media types receive
+406. Unknown URLs retain HTTP 404 and provide a Markdown explanation and recovery
+links when Markdown is preferred. Browser error pages and legal notices remain
+unchanged.
+
+`/index.md` exposes the same Markdown without negotiation. Update
+`server/utils/homepage-markdown.ts` alongside changes to the landing content.
+The homepage HTML includes Schema.org `Person` JSON-LD and discovery links.
+`public/llms.txt` follows the llms.txt format: introductory guidance before H2
+sections, followed by linked file lists. It describes project fit and contact,
+without claiming a public API, availability or pricing.
+
+`public/sitemap.xml` lists the homepage only: `/mentions-legales` deliberately
+remains `noindex, follow`, and alternate representations and metadata files are
+not separate indexable pages. Update `lastmod` when the homepage content changes,
+not on every build. `public/robots.txt` advertises the sitemap without introducing
+crawler or AI-training policy directives; Cloudflare may add its managed rules.
+
+`pnpm test` builds the Node production preset and runs HTTP contract tests using
+Node's built-in test runner, starting and stopping its own server. To run the same
+checks against an already running preview or a deployed origin, use
+`TEST_BASE_URL=<origin> node --test tests/*.test.mjs`.
+
 `pnpm check` runs the complementary Vite+ check, then the existing Nuxt ESLint
 and Vue type checks. `pnpm check:vite-plus` runs only Vite+ (Oxlint and native
 TypeScript checks); it is not a replacement for `pnpm lint` or `pnpm typecheck`.
