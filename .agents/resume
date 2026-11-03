@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Dependencies and generated Nuxt types are restored from the project snapshot.
+# There are no backing services or authentication steps to repair on wake.
