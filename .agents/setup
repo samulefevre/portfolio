@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+# Node.js and Corepack are provided by the orb base image. Corepack reads
+# packageManager from package.json so setup uses the repository's pnpm version.
+echo "Toolchain: Node.js $(node --version), pnpm $(corepack pnpm --version)"
+echo "Installing locked dependencies and preparing Nuxt types"
+time corepack pnpm install --frozen-lockfile --prod=false

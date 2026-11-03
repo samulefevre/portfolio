@@ -4,6 +4,7 @@ node_modules
 nuxt.d.ts
 .output
 .wrangler
+.amp/portals/*
 
 # Local Netlify folder
 .netlify
