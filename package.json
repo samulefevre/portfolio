@@ -1,21 +1,28 @@
 {
   "name": "samuel-lefevre-portfolio",
   "private": true,
+  "engines": {
+    "node": "26.13.0"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "check": "pnpm check:vite-plus && pnpm lint && pnpm typecheck",
+    "check:vite-plus": "vp check --deny-warnings",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck"
   },
   "devDependencies": {
     "@iconify-json/lucide": "^1.2.150",
     "@nuxt/eslint": "^1.17.0",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^10.14.0",
-    "nuxt": "^4.6.3",
-    "typescript": "^7.0.2",
+    "nuxt": "npm:nuxt-nightly@5.0.0-2611030021-146df55",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "vite-plus": "^1.4.0",
     "vue-tsc": "^3.3.14",
     "wrangler": "4.156.1"
   },

@@ -3,8 +3,19 @@ set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
-# Node.js and Corepack are provided by the orb base image. Corepack reads
-# packageManager from package.json so setup uses the repository's pnpm version.
+node_version="$(cat .nvmrc)"
+if [[ "$(node --version)" != "v${node_version}" ]]; then
+  echo "Installing Node.js ${node_version}"
+  archive="node-v${node_version}-linux-$(node -p 'process.arch').tar.xz"
+  download_dir="$(mktemp -d)"
+  trap 'rm -rf "$download_dir"' EXIT
+  curl -fsSL "https://nodejs.org/dist/v${node_version}/${archive}" -o "${download_dir}/${archive}"
+  curl -fsSL "https://nodejs.org/dist/v${node_version}/SHASUMS256.txt" -o "${download_dir}/SHASUMS256.txt"
+  (cd "$download_dir" && grep " ${archive}$" SHASUMS256.txt | sha256sum --check)
+  tar -xJf "${download_dir}/${archive}" -C /usr/local --strip-components=1 "${archive%.tar.xz}/bin/node"
+fi
+
+# Corepack reads packageManager from package.json to select pnpm.
 echo "Toolchain: Node.js $(node --version), pnpm $(corepack pnpm --version)"
 echo "Installing locked dependencies and preparing Nuxt types"
 time corepack pnpm install --frozen-lockfile --prod=false

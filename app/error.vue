@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{ error: { statusCode: number } }>()
+import type { NuxtError } from '#app'
+
+const props = defineProps<{ error: NuxtError }>()
 
 useSeoMeta({
   title: 'Page introuvable — Samuel Lefèvre',
@@ -16,7 +18,7 @@ useSeoMeta({
       <Header />
       <UMain id="main-content">
         <UPageHero
-          :headline="`Erreur ${props.error.statusCode}`"
+          :headline="`Erreur ${props.error.status}`"
           title="Cette page est introuvable."
           description="Le lien a peut-être changé. Vous pouvez revenir à l’accueil."
           :links="[{ label: 'Retour à l’accueil', to: '/', trailingIcon: 'i-lucide-arrow-up-right' }]"
