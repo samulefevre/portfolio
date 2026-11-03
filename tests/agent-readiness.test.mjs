@@ -144,6 +144,52 @@ void test('homepage HTML contains parseable Person JSON-LD and discovery links',
   assert.match(html, /<link\b(?=[^>]*rel="alternate")(?=[^>]*type="text\/markdown")(?=[^>]*href="\/index.md")[^>]*>/)
 })
 
+void test('homepage publishes canonical, language and Open Graph attribution signals', async () => {
+  const html = await (await request('/?source=agent', 'text/html')).text()
+  assert.match(html, /<html\b[^>]*lang="fr"/)
+  const canonicals = html.match(/<link\b(?=[^>]*rel="canonical")[^>]*>/g)
+  assert.equal(canonicals?.length, 1)
+  assert.match(canonicals[0], /href="https:\/\/samuel-lefevre\.com\/"/)
+  assert.match(html, /<meta\b(?=[^>]*property="og:title")(?=[^>]*content="Samuel Lefèvre — Développeur full-stack TypeScript")[^>]*>/)
+  assert.match(html, /<meta\b(?=[^>]*property="og:url")(?=[^>]*content="https:\/\/samuel-lefevre\.com\/")[^>]*>/)
+  assert.match(html, /<meta\b(?=[^>]*property="og:type")(?=[^>]*content="website")[^>]*>/)
+  assert.match(html, /<meta\b(?=[^>]*property="og:image")(?=[^>]*content="https:\/\/samuel-lefevre\.com\/og-image.png")[^>]*>/)
+  assert.match(html, /<meta\b(?=[^>]*property="og:image:width")(?=[^>]*content="1200")[^>]*>/)
+  assert.match(html, /<meta\b(?=[^>]*property="og:image:height")(?=[^>]*content="630")[^>]*>/)
+  assert.match(html, /<meta\b(?=[^>]*property="og:image:alt")(?=[^>]*content="Samuel Lefèvre — Développeur full-stack TypeScript\. Des logiciels pensés pour durer\.")[^>]*>/)
+  const image = await request('/og-image.png')
+  assert.equal(image.status, 200)
+  assert.match(image.headers.get('content-type'), /^image\/png\b/)
+  const bytes = Buffer.from(await image.arrayBuffer())
+  assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
+  assert.equal(bytes.readUInt32BE(16), 1200)
+  assert.equal(bytes.readUInt32BE(20), 630)
+})
+
+void test('business information pages have substantive, distinct, indexable content', async () => {
+  const homepage = await (await request('/', 'text/html')).text()
+  for (const [path, title, topic] of [
+    ['/about', 'À propos', '853 383 883'],
+    ['/contact', 'Contact', 'mailto:samuel.lefevr@gmail.com'],
+    ['/privacy', 'Confidentialité', 'stockage local'],
+  ]) {
+    const response = await request(path, 'text/html')
+    assert.equal(response.status, 200, path)
+    const html = await response.text()
+    const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)[1]
+    const prose = main.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+    assert.ok(prose.length >= 500, `${path}: ${prose.length} characters`)
+    assert.match(main, /<h1\b/)
+    assert.ok(prose.includes(title), path)
+    assert.ok(main.includes(topic), path)
+    assert.doesNotMatch(html, /<meta[^>]*name="robots"[^>]*content="[^"]*noindex/)
+    const canonical = html.match(/<link\b(?=[^>]*rel="canonical")[^>]*>/g)
+    assert.equal(canonical?.length, 1, path)
+    assert.ok(canonical[0].includes(`href="https://samuel-lefevre.com${path}"`))
+    assert.ok(homepage.includes(`href="${path}"`), `Homepage links to ${path}`)
+  }
+})
+
 void test('llms.txt follows the heading, summary, guidance and linked file-list format', async () => {
   const response = await request('/llms.txt')
   assert.equal(response.status, 200)
@@ -168,10 +214,18 @@ void test('sitemap lists only indexable canonical pages and robots advertises it
   assert.match(response.headers.get('content-type'), /^(application|text)\/xml\b/)
   const xml = await response.text()
   assert.ok(Buffer.byteLength(xml) < 52_428_800)
-  assert.match(xml, /^<\?xml version="1.0" encoding="UTF-8"\?>\s*<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">\s*<url>\s*<loc>https:\/\/samuel-lefevre\.com\/<\/loc>\s*<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>\s*<\/url>\s*<\/urlset>\s*$/)
-  const lastmod = xml.match(/<lastmod>([^<]+)<\/lastmod>/)[1]
-  assert.equal(new Date(lastmod).toISOString().slice(0, 10), lastmod)
-  assert.ok(Date.parse(lastmod) <= Date.now())
+  assert.match(xml, /^<\?xml version="1.0" encoding="UTF-8"\?>\s*<urlset xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9">[\s\S]*<\/urlset>\s*$/)
+  const entries = [...xml.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>\s*<\/url>/g)]
+  assert.deepEqual(entries.map(entry => entry[1]), [
+    'https://samuel-lefevre.com/',
+    'https://samuel-lefevre.com/about',
+    'https://samuel-lefevre.com/contact',
+    'https://samuel-lefevre.com/privacy',
+  ])
+  for (const [, , lastmod] of entries) {
+    assert.equal(new Date(lastmod).toISOString().slice(0, 10), lastmod)
+    assert.ok(Date.parse(lastmod) <= Date.now())
+  }
   const homepage = await request('/', 'text/html')
   assert.equal(homepage.status, 200)
   assert.doesNotMatch(await homepage.text(), /<meta[^>]*name="robots"[^>]*content="[^"]*noindex/)

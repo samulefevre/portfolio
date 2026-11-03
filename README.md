@@ -33,10 +33,10 @@ The homepage HTML includes Schema.org `Person` JSON-LD and discovery links.
 sections, followed by linked file lists. It describes project fit and contact,
 without claiming a public API, availability or pricing.
 
-`public/sitemap.xml` lists the homepage only: `/mentions-legales` deliberately
-remains `noindex, follow`, and alternate representations and metadata files are
-not separate indexable pages. Update `lastmod` when the homepage content changes,
-not on every build. `public/robots.txt` advertises the sitemap without introducing
+`public/sitemap.xml` lists the homepage and the `/about`, `/contact` and `/privacy`
+pages. `/mentions-legales` deliberately remains `noindex, follow`, and alternate
+representations and metadata files are not separate indexable pages. Update
+`lastmod` when a page changes, not on every build. `public/robots.txt` advertises the sitemap without introducing
 crawler or AI-training policy directives; Cloudflare may add its managed rules.
 
 `pnpm test` builds the Node production preset and runs HTTP contract tests using

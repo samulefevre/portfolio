@@ -47,6 +47,9 @@ L’architecture sépare quatre couches : interface (Nuxt, Flutter), application
 ## Informations
 
 - [Site officiel](https://samuel-lefevre.com/)
+- [À propos](https://samuel-lefevre.com/about)
+- [Contact](https://samuel-lefevre.com/contact)
+- [Confidentialité](https://samuel-lefevre.com/privacy)
 - [Instructions pour les agents](https://samuel-lefevre.com/llms.txt)
 - [Plan du site](https://samuel-lefevre.com/sitemap.xml)
 - [Mentions légales](https://samuel-lefevre.com/mentions-legales)

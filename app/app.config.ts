@@ -45,7 +45,7 @@ export default defineAppConfig({
         root: 'bg-[var(--portfolio-footer)] text-[#93adbe]',
         container: 'flex items-center justify-between gap-8 py-[1.8rem] font-mono text-[.65rem] max-[700px]:flex-wrap',
         left: 'order-0 m-0 flex-none',
-        center: 'order-1 m-0 flex-none max-[700px]:hidden',
+        center: 'order-1 m-0 flex-none',
         right: 'order-2 m-0 flex-none gap-7',
       },
     },
