@@ -22,7 +22,7 @@
     "@types/negotiator": "^0.6.5",
     "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^10.14.0",
-    "nuxt": "npm:nuxt-nightly@5.0.0-2611111405-4462a07",
+    "nuxt": "npm:nuxt-nightly@5.0.0-2611111540-ed465e0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite-plus": "^1.4.0",
     "vue-tsc": "^3.3.14",
