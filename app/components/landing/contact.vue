@@ -17,7 +17,7 @@ const ctaUi = {
       <p class="portfolio-eyebrow">
         CONTACT / COLLABORATION
       </p>
-      <h2>Vous avez un projet<br><em>à construire&nbsp;?</em></h2>
+      <h2>Vous avez un&nbsp;projet<br><em>à construire&nbsp;?</em></h2>
       <p class="portfolio-contact-intro">
         Échangeons sur vos besoins, vos contraintes et la meilleure façon d’avancer.
       </p>

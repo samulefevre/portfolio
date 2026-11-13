@@ -15,7 +15,7 @@ const cardUi = {
   leading: 'mb-8 font-mono text-[.72rem] font-medium text-primary max-[700px]:mb-4',
   title: 'mb-[.8rem] text-xl leading-[1.3]',
   description: 'm-0 text-[.88rem]',
-  footer: 'mt-auto pt-6 font-mono text-[.65rem] leading-[1.65] text-primary',
+  footer: 'mt-auto pt-6 font-mono text-[.72rem] leading-[1.65] text-primary',
 }
 
 const insetCardUi = {
@@ -33,7 +33,7 @@ const insetCardUi = {
     :ui="introSectionUi"
   >
     <template #title>
-      De l’idée au produit,<br><em>avec les bonnes fondations.</em>
+      De l’idée au&nbsp;produit,<br><em>avec les bonnes fondations.</em>
     </template>
     <UPageGrid class="portfolio-expertise-grid">
       <UPageCard

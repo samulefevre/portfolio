@@ -17,7 +17,7 @@ const heroUi = {
       :ui="heroUi"
     />
     <UContainer class="pb-20">
-      <div class="portfolio-legal-card portfolio-legal-prose max-w-[760px] space-y-10 [&_h2]:mb-4 [&_h2]:text-xl [&_h2]:font-semibold">
+      <div class="portfolio-legal-card portfolio-legal-prose max-w-[760px] space-y-10 [&_h2]:mb-4 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:tracking-[-0.01em]">
         <slot />
       </div>
     </UContainer>
