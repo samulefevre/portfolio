@@ -37,7 +37,10 @@ export default defineAppConfig({
     },
     header: {
       slots: {
-        root: 'bg-default border-default backdrop-blur-none',
+        root: 'bg-default/80 backdrop-blur-[20px] backdrop-saturate-[1.8]',
+        header: 'px-5 sm:px-10',
+        body: 'px-5 sm:px-10',
+        content: 'portfolio-menu',
       },
     },
     footer: {

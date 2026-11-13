@@ -65,6 +65,22 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ui-primary); ou
 .portfolio-contact { scroll-margin-top: 0; }
 
 /* Header */
+@keyframes portfolio-header-edge { from { border-bottom-color: transparent; } }
+@supports (animation-timeline: scroll()) {
+  .portfolio-header { animation: portfolio-header-edge linear both; animation-timeline: scroll(root); animation-range: 0 3rem; }
+}
+
+@keyframes portfolio-menu-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes portfolio-menu-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes portfolio-menu-body-in { from { transform: translateY(-.75rem); } to { transform: translateY(0); } }
+@keyframes portfolio-menu-body-out { from { transform: translateY(0); } to { transform: translateY(-.75rem); } }
+.portfolio-menu[data-state="open"] { animation: portfolio-menu-in 300ms cubic-bezier(.32,.72,0,1); }
+.portfolio-menu[data-state="closed"] { animation: portfolio-menu-out 240ms cubic-bezier(1,0,.68,.28) forwards; }
+.portfolio-menu[data-state="open"] [data-slot="body"] { animation: portfolio-menu-body-in 300ms cubic-bezier(.32,.72,0,1); }
+.portfolio-menu[data-state="closed"] [data-slot="body"] { animation: portfolio-menu-body-out 240ms cubic-bezier(1,0,.68,.28) forwards; }
+
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 200ms; animation-timing-function: ease; }
+
 .portfolio-wordmark { font: 800 1.55rem/1 var(--font-display); letter-spacing: -.1em; color: var(--ui-text-highlighted); }
 .portfolio-wordmark span { color: var(--ui-primary); }
 .portfolio-nav { gap: 2.8rem; margin-left: 4rem; }
@@ -213,4 +229,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ui-primary); ou
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }
   .portfolio-primary-button:hover { transform: none; }
+  .portfolio-menu [data-slot="body"] { animation: none !important; transform: none !important; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .portfolio-header { background: var(--ui-bg); backdrop-filter: none; }
+}
+
+@media (prefers-contrast: more) {
+  .portfolio-header { background: var(--ui-bg); backdrop-filter: none; animation: none; border-bottom-color: var(--ui-text-muted); }
 }

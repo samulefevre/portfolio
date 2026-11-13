@@ -6,6 +6,23 @@ const items: NavigationMenuItem[] = [
   { label: 'Engineering', to: '/#engineering', active: false },
   { label: 'À propos', to: '/#about', active: false },
 ]
+
+const colorMode = useColorMode()
+const appConfig = useAppConfig()
+
+function toggleTheme() {
+  const apply = () => {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+    return nextTick()
+  }
+
+  if (document.startViewTransition) {
+    document.startViewTransition(apply)
+  }
+  else {
+    void apply()
+  }
+}
 </script>
 
 <template>
@@ -31,12 +48,22 @@ const items: NavigationMenuItem[] = [
     />
 
     <template #right>
-      <UColorModeButton
+      <UButton
         color="neutral"
         variant="ghost"
         aria-label="Changer de thème clair ou sombre"
         class="portfolio-theme-toggle"
-      />
+        @click="toggleTheme"
+      >
+        <UIcon
+          :name="appConfig.ui.icons.dark"
+          class="size-5 hidden dark:inline-block"
+        />
+        <UIcon
+          :name="appConfig.ui.icons.light"
+          class="size-5 dark:hidden"
+        />
+      </UButton>
       <UButton
         to="/#contact"
         label="Me contacter"
@@ -59,6 +86,9 @@ const items: NavigationMenuItem[] = [
         to="/#contact"
         label="Me contacter"
         trailing-icon="i-lucide-arrow-up-right"
+        color="neutral"
+        variant="outline"
+        class="portfolio-header-contact justify-between"
         block
       />
     </template>
