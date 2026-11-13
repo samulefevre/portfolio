@@ -41,6 +41,7 @@
   --portfolio-deep: #19354d;
   --portfolio-footer: #152d42;
   scroll-behavior: smooth;
+  scroll-padding-top: var(--ui-header-height);
 }
 
 .dark {
@@ -61,8 +62,6 @@
 
 a:focus-visible, button:focus-visible { outline: 2px solid var(--ui-primary); outline-offset: 4px; }
 ::selection { background: var(--color-brand-200); color: #1b2b3a; }
-.portfolio-section { scroll-margin-top: 3rem; }
-.portfolio-contact { scroll-margin-top: 0; }
 
 /* Header */
 @keyframes portfolio-header-edge { from { border-bottom-color: transparent; } }
