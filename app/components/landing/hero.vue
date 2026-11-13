@@ -8,7 +8,7 @@ const steps = [
 
 const heroUi = {
   container: 'portfolio-hero-container grid grid-cols-[minmax(0,1fr)_minmax(330px,440px)] lg:grid-cols-[minmax(0,1fr)_minmax(330px,440px)] items-center gap-[8%] max-[1000px]:grid-cols-1 max-[1000px]:gap-16 max-[700px]:gap-12',
-  title: 'max-w-[800px] text-[clamp(3.6rem,6.1vw,6.1rem)] sm:text-[clamp(3.6rem,6.1vw,6.1rem)] max-[700px]:text-[clamp(3.3rem,12vw,5rem)]',
+  title: 'max-w-[800px] text-[clamp(3.6rem,6.1vw,6.1rem)] sm:text-[clamp(3.6rem,6.1vw,6.1rem)] max-[700px]:text-[clamp(3.3rem,12vw,5rem)] leading-[1.08]',
   description: 'mt-[2.2rem] max-w-[570px] text-[1.19rem] max-[700px]:text-[1.03rem]',
   footer: 'mt-[2.2rem]',
 }

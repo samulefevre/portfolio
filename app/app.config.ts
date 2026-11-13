@@ -54,5 +54,10 @@ export default defineAppConfig({
         base: 'font-mono',
       },
     },
+    button: {
+      slots: {
+        base: 'transition-[color,background-color,border-color,box-shadow,transform,translate,scale] duration-150 ease-out active:scale-[.97]',
+      },
+    },
   },
 })

@@ -90,7 +90,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ui-primary); ou
 .portfolio-hero-container { padding-top: 118px; padding-bottom: 132px; }
 .portfolio-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 2rem; }
 .portfolio-primary-button { min-height: 60px; justify-content: space-between; gap: 2.5rem; padding: 1.2rem 1.35rem; font-size: .86rem; font-weight: 700; }
-.portfolio-primary-button:hover { transform: translateY(-2px); box-shadow: 0 10px 22px #19354d22; }
+@media (hover: hover) {
+  .portfolio-primary-button:hover { transform: translateY(-2px); box-shadow: 0 10px 22px #19354d22; }
+}
 .portfolio-primary-button svg { color: var(--color-brand-200); }
 .portfolio-text-button { padding-inline: 0; padding-bottom: .35rem; border-bottom: 1px solid var(--ui-text-highlighted); color: var(--ui-text-highlighted); font-size: .86rem; font-weight: 700; }
 .portfolio-text-button svg { color: var(--ui-primary); }
