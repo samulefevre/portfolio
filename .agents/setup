@@ -12,7 +12,8 @@ if [[ "$(node --version)" != "v${node_version}" ]]; then
   curl -fsSL "https://nodejs.org/dist/v${node_version}/${archive}" -o "${download_dir}/${archive}"
   curl -fsSL "https://nodejs.org/dist/v${node_version}/SHASUMS256.txt" -o "${download_dir}/SHASUMS256.txt"
   (cd "$download_dir" && grep " ${archive}$" SHASUMS256.txt | sha256sum --check)
-  tar -xJf "${download_dir}/${archive}" -C /usr/local --strip-components=1 "${archive%.tar.xz}/bin/node"
+  # /usr/local is owned by root in the orb image.
+  sudo tar -xJf "${download_dir}/${archive}" -C /usr/local --strip-components=1 "${archive%.tar.xz}/bin/node"
 fi
 
 # Corepack reads packageManager from package.json to select pnpm.
