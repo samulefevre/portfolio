@@ -6,6 +6,8 @@ const steps = [
   { title: 'Déployer', description: 'Automatiser et observer' },
 ]
 
+const stack = ['Nuxt', 'TypeScript', 'PostgreSQL', 'Cloudflare', 'Flutter']
+
 const heroUi = {
   container: 'portfolio-hero-container grid grid-cols-[minmax(0,1fr)_minmax(330px,440px)] lg:grid-cols-[minmax(0,1fr)_minmax(330px,440px)] items-center gap-[8%] max-[1000px]:grid-cols-1 max-[1000px]:gap-16 max-[700px]:gap-12',
   title: 'max-w-[800px] text-[clamp(3.6rem,6.1vw,6.1rem)] sm:text-[clamp(3.6rem,6.1vw,6.1rem)] max-[700px]:text-[clamp(3.3rem,12vw,5rem)] leading-[1.08]',
@@ -32,11 +34,14 @@ const diagramUi = {
     :ui="heroUi"
   >
     <template #headline>
-      <span class="portfolio-eyebrow"><span class="portfolio-status-dot" />Samuel Lefèvre · Développeur full-stack TypeScript</span>
+      <span class="portfolio-eyebrow portfolio-hero-eyebrow">
+        <span class="portfolio-status-dot" />
+        <span><span>Samuel Lefèvre</span><span aria-hidden="true"> · </span><span>Développeur full-stack TypeScript</span></span>
+      </span>
     </template>
 
     <template #title>
-      Des logiciels pensés <em>pour durer.</em>
+      Des logiciels pensés <em>pour&nbsp;durer.</em>
     </template>
 
     <template #description>
@@ -62,9 +67,16 @@ const diagramUi = {
           class="portfolio-text-button"
         />
       </div>
-      <p class="portfolio-hero-stack">
-        Nuxt <span>·</span> TypeScript <span>·</span> PostgreSQL <span>·</span> Cloudflare <span>·</span> Flutter
-      </p>
+      <div class="portfolio-hero-stack">
+        <ul aria-label="Technologies">
+          <li
+            v-for="tool in stack"
+            :key="tool"
+          >
+            {{ tool }}
+          </li>
+        </ul>
+      </div>
     </template>
 
     <UCard

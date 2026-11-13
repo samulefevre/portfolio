@@ -17,7 +17,7 @@ const groups = [
     :ui="splitSectionUi"
   >
     <template #title>
-      Les outils au service<br><em>des enjeux.</em>
+      Les outils au&nbsp;service<br><em>des enjeux.</em>
     </template>
     <dl class="portfolio-stack-list">
       <div

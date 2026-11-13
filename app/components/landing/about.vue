@@ -11,7 +11,7 @@ import { splitSectionUi } from '~/utils/portfolio-ui'
     :ui="splitSectionUi"
   >
     <template #title>
-      Bonjour, moi c’est<br><em>Samuel.</em>
+      Bonjour, moi&nbsp;c’est<br><em>Samuel.</em>
     </template>
     <div class="portfolio-about-copy">
       <p>Développeur full-stack spécialisé dans l’écosystème TypeScript et Nuxt, je travaille sur des applications SaaS, des architectures modulaires et des environnements cloud modernes.</p>
